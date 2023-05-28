@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		659585232A23E30C0099A94D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659585222A23E30C0099A94D /* LocationManager.swift */; };
+		659585252A23EA410099A94D /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659585242A23EA410099A94D /* NetworkServiceTests.swift */; };
 		65DD2DBD2A20176A003BED28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD2DBC2A20176A003BED28 /* AppDelegate.swift */; };
 		65DD2DBF2A20176A003BED28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD2DBE2A20176A003BED28 /* SceneDelegate.swift */; };
 		65DD2DC12A20176A003BED28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD2DC02A20176A003BED28 /* ViewController.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		659585222A23E30C0099A94D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		659585242A23EA410099A94D /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		65DD2DB92A20176A003BED28 /* Weather-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65DD2DBC2A20176A003BED28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65DD2DBE2A20176A003BED28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		659585212A23E2F60099A94D /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				659585222A23E30C0099A94D /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		65DD2DB02A20176A003BED28 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +134,7 @@
 				65F0DD162A22DC2A000F3CB7 /* ViewModel */,
 				65DD2DF32A203456003BED28 /* Main */,
 				65DD2DED2A202BDB003BED28 /* Network */,
+				659585212A23E2F60099A94D /* Location */,
 				65DD2DF02A2032C8003BED28 /* Resources */,
 				65F0DD1E2A22E3CF000F3CB7 /* Constants.swift */,
 				65DD2DC02A20176A003BED28 /* ViewController.swift */,
@@ -137,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				65DD2DD32A20176C003BED28 /* Weather_TestTests.swift */,
+				659585242A23EA410099A94D /* NetworkServiceTests.swift */,
 			);
 			path = "Weather-TestTests";
 			sourceTree = "<group>";
@@ -342,6 +356,7 @@
 				65F0DD152A22DBD3000F3CB7 /* Utils.swift in Sources */,
 				65F0DD1B2A22DE03000F3CB7 /* WeatherInformation.swift in Sources */,
 				65DD2DBD2A20176A003BED28 /* AppDelegate.swift in Sources */,
+				659585232A23E30C0099A94D /* LocationManager.swift in Sources */,
 				65F0DD132A22D9E0000F3CB7 /* WeatherInformationView.swift in Sources */,
 				65DD2DBF2A20176A003BED28 /* SceneDelegate.swift in Sources */,
 				65F0DD182A22DC5B000F3CB7 /* WeatherReportViewModel.swift in Sources */,
@@ -352,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				659585252A23EA410099A94D /* NetworkServiceTests.swift in Sources */,
 				65DD2DD42A20176C003BED28 /* Weather_TestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,11 +539,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Weather-Test/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location used to track current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,11 +568,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Weather-Test/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location used to track current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

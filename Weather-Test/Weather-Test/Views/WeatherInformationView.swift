@@ -87,6 +87,7 @@ struct WeatherInformationView: View {
                 ProgressView().scaleEffect(2.0, anchor: .center)
             } else {
                 VStack {
+                    //View in vertical order
                     timeView()
                     Spacer().frame(maxHeight: 20)
                     temperatureView()

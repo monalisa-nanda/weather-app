@@ -10,12 +10,14 @@ import SwiftUI
 
 class WeatherReportViewModel: ObservableObject {
     static let userDefaultKey = "weather_city"
-    @MainActor @Published var weatherInfo = WeatherInfomation() //Monalisa - Until we keep @MainActor @Published, then no update on view's body to show UI
+    @MainActor @Published var weatherInfo = WeatherInfomation() //Until we keep @MainActor @Published, there is no update on view's body to show UI once after API data is received
     
     private let networkManager: NetworkManagerProtocol
+    private let locationManager: LocationManagerProtocol
     
-    init(networkManager: NetworkManagerProtocol) {
+    init(networkManager: NetworkManagerProtocol, locationManager: LocationManagerProtocol) {
         self.networkManager = networkManager
+        self.locationManager = locationManager
     }
     
     func loadData() async {
@@ -30,12 +32,12 @@ class WeatherReportViewModel: ObservableObject {
                 response = try? await networkManager.fetchWeatherInfoByName(cityName: cityName ,
                                                                             country: nil, state: nil)
             }
-//            else if let position = locationService.getPosition() {
-//                // (2) user's location city
-//                response = try await networkManager.fetchWeatherInfoByPosition(lat: position.lat, lon: position.lon)
-//            }
+            else if let position = locationManager.getLocationPosition() {
+                // user's location city
+                response = try await networkManager.fetchWeatherInfoByGeoPosition(lat: position.lat, lon: position.lon)
+            }
             else {
-                // (3) default city
+                // default city
                 await MainActor.run {
                     weatherInfo.cityName = weatherApplicationInfo.defaultCity
                 }
@@ -61,6 +63,7 @@ class WeatherReportViewModel: ObservableObject {
     
     @MainActor private func saveLastCityName()  {
         if let cityName = self.weatherInfo.cityName {
+            //Save last entered city name in User defaults to show for the next app launch automatically
             UserDefaults.standard.set(cityName, forKey: Self.userDefaultKey)
         }
     }

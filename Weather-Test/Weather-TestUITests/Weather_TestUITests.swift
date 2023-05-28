@@ -22,14 +22,6 @@ class Weather_TestUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
@@ -37,5 +29,23 @@ class Weather_TestUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+    
+    func test_UI() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        let searchfield = app.searchFields.element(boundBy: 0)
+        searchfield.tap()
+        searchfield.typeText("Dallas")
+        sleep(1)
+        var deleteString = String()
+        for _ in "Dallas" {
+            deleteString += XCUIKeyboardKey.delete.rawValue
+        }
+        searchfield.typeText(deleteString)
+        sleep(1)
+        searchfield.typeText("Colorado")
+        XCTAssert(true)
     }
 }

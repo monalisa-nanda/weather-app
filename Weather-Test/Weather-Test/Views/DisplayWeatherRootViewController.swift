@@ -17,14 +17,17 @@ class DisplayWeatherRootViewController: UIViewController {
     private var weatherView: UIHostingController<WeatherInformationView>?
     private var viewModel: WeatherReportViewModel?
     
+    // MARK: Default Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        assembleMVVM()
+        setupViewModel()
         setupUI()
     }
-    
+
+    // MARK: UI
     func setupUI() {
+        //Implementation of SearBar using UIKIT
         view.backgroundColor = .white
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(searchBar)
@@ -36,22 +39,25 @@ class DisplayWeatherRootViewController: UIViewController {
             searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant:-20)
             ])
-        if let swiftUIView = weatherView {
-            view.addSubview(swiftUIView.view)
-            self.addChild(swiftUIView)
-            swiftUIView.view.translatesAutoresizingMaskIntoConstraints = false
+        //Implementation of Weather UI in Swift UI
+        if let weatherUIView = weatherView {
+            view.addSubview(weatherUIView.view)
+            self.addChild(weatherUIView)
+            weatherUIView.view.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                swiftUIView.view.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
-                swiftUIView.view.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-                swiftUIView.view.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
-                swiftUIView.view.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -20)
+                weatherUIView.view.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+                weatherUIView.view.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                weatherUIView.view.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                weatherUIView.view.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -20)
             ])
         }
     }
     
-    private func assembleMVVM() {
+    private func setupViewModel() {
         let networkManager = NetworkManager()
-        viewModel = WeatherReportViewModel(networkManager: networkManager)
+        let locationManager = LocationManager()
+        
+        viewModel = WeatherReportViewModel(networkManager: networkManager, locationManager: locationManager)
         if let vm = viewModel {
             weatherView = UIHostingController(rootView: WeatherInformationView(weatherReportViewModel: vm))
         }
@@ -64,6 +70,7 @@ class DisplayWeatherRootViewController: UIViewController {
     }
 }
 
+// MARK: Searbar Delegate
 extension DisplayWeatherRootViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
